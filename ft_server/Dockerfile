@@ -6,7 +6,7 @@
 #    By: doyokim <doyokim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/27 15:14:43 by doyokim           #+#    #+#              #
-#    Updated: 2021/04/29 16:46:22 by doyokim          ###   ########.fr        #
+#    Updated: 2021/05/03 12:40:28 by doyokim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,9 @@ ADD ./srcs/wordpress-5.7.1.tar.gz .
 RUN	mv wordpress ./var/www/html/
 RUN chown -R www-data:www-data /var/www/html/wordpress
 
-
-
 COPY ./srcs/wp-config.php ./var/www/html/wordpress/
+COPY ./srcs/config.inc.php ./var/www/html/phpmyadmin/
 
 #RUN sevice php7.3-fpm restart
+
+CMD bash
