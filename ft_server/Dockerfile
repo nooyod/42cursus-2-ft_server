@@ -6,7 +6,7 @@
 #    By: doyokim <doyokim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/27 15:14:43 by doyokim           #+#    #+#              #
-#    Updated: 2021/05/06 16:42:32 by doyokim          ###   ########.fr        #
+#    Updated: 2021/05/07 02:14:35 by doyokim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,3 +40,7 @@ COPY ./srcs/wp-config.php ./var/www/html/wordpress/
 COPY ./srcs/config.inc.php ./var/www/html/phpmyadmin/
 
 EXPOSE 80 443
+
+#RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
+
+ENTRYPOINT service nginx start && service php7.3-fpm start && service mysql start && /bin/bash
