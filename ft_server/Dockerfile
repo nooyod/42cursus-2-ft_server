@@ -6,7 +6,7 @@
 #    By: doyokim <doyokim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/27 15:14:43 by doyokim           #+#    #+#              #
-#    Updated: 2021/05/03 12:40:28 by doyokim          ###   ########.fr        #
+#    Updated: 2021/05/06 16:42:32 by doyokim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,6 @@ RUN mv ./tmp/phpMyAdmin-5.0.2-all-languages ./var/www/html/phpmyadmin
 
 COPY ./srcs/default ./etc/nginx/sites-available/
 
-RUN service nginx start
-RUN service php7.3-fpm start
-#RUN service mysql stop
-#RUN chmod 755 -R ./var/lib/mysql
-#RUN chown mysql:mysql -R ./var/lib/mysql
 RUN ./etc/init.d/mysql start && mysql -u root -e "CREATE DATABASE wordpress;" --skip-password && mysql -u root -e "CREATE USER 'doyokim'@'localhost' IDENTIFIED BY '1234';" --skip-password && mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'doyokim'@'localhost' WITH GRANT OPTION;" --skip-password
 RUN service mysql restart
 
@@ -44,6 +39,4 @@ RUN chown -R www-data:www-data /var/www/html/wordpress
 COPY ./srcs/wp-config.php ./var/www/html/wordpress/
 COPY ./srcs/config.inc.php ./var/www/html/phpmyadmin/
 
-#RUN sevice php7.3-fpm restart
-
-CMD bash
+EXPOSE 80 443
